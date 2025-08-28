@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Sign Up — Luxury Stays</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      font-family: Inter, Arial, sans-serif;
+    }
+
+    /* Fullscreen Background Video */
+    .bg-video {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    .bg-overlay {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+    }
+
+    .glass {
+      backdrop-filter: blur(8px);
+      background: rgba(255,255,255,0.85);
+      border-radius: 14px;
+      padding: 30px 25px;
+      width: 420px;
+      max-width: 95%;
+      margin: auto;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 1;
+    }
+
+    .glass h4 { font-weight: 600; }
+
+    .btn-warning { background-color: #f8d210; border: none; }
+    .btn-warning:hover { background-color: #e0b500; }
+
+    .btn-secondary { background-color: #6c757d; border: none; }
+    .btn-secondary:hover { background-color: #5a6268; }
+
+    /* Centering */
+    .container-glass {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    /* Media Queries */
+    @media (max-width: 1200px) { .glass { padding: 28px 22px; } }
+    @media (max-width: 992px) { .glass { padding: 25px 20px; } }
+    @media (max-width: 768px) { .glass { padding: 22px 18px; } }
+    @media (max-width: 576px) { 
+      .glass { width: 95%; padding: 18px; }
+      .row.g-2 > .col-md-6 { flex: 0 0 100%; max-width: 100%; }
+      .d-flex.gap-2 { flex-direction: column; }
+      .d-flex.gap-2 .btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Background Video -->
+  <video class="bg-video" autoplay muted loop>
+    <source src="Assets/Photos/8514931-hd_1920_1080_30fps.mp4" type="video/mp4">
+    Your browser does not support HTML5 video.
+  </video>
+  <div class="bg-overlay"></div>
+
+  <!-- Glass Card -->
+  <div class="container-glass">
+    <div class="glass shadow">
+      <h4 class="mb-3 text-center">Create an account</h4>
+      <form id="frmSignup">
+        <div class="row g-2">
+          <div class="col-md-6"><input class="form-control" placeholder="First name" required></div>
+          <div class="col-md-6"><input class="form-control" placeholder="Last name" required></div>
+        </div>
+        <div class="mt-2"><input type="email" class="form-control" placeholder="Email" required></div>
+        <div class="mt-2"><input type="password" id="pwd" class="form-control" placeholder="Password (min 6 chars)" minlength="6" required></div>
+        <div class="form-check mt-2">
+          <input class="form-check-input" id="tos" type="checkbox" required>
+          <label class="form-check-label" for="tos">Agree to Terms</label>
+        </div>
+        <div class="d-grid mt-3"><button class="btn btn-warning">Sign up</button></div>
+      </form>
+
+      <p class="small text-center mt-3">Already have an account? <a href="login.html">Login</a></p>
+
+      <!-- Return to Home Button -->
+      <div class="d-grid mt-2">
+        <a href="index.html" class="btn btn-secondary">Return to Home</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('frmSignup').addEventListener('submit', e=>{
+      e.preventDefault(); 
+      alert('Account created (simulated)'); 
+      window.location.href='index.html';
+    });
+  </script>
+</body>
+</html>

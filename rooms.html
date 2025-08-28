@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Hotels — Luxury Stays</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
+  <style>
+    :root{
+      --accent:#f8d210;
+      --muted:#6c757d;
+      --bg:#0b1320;
+      --card-bg:#ffffff;
+      --glass: rgba(255,255,255,0.9);
+    }
+    /* shared navbar/footer styles (same as index) */
+    .site-navbar{background:linear-gradient(180deg, rgba(11,19,32,0.65), rgba(11,19,32,0.35)); backdrop-filter:blur(6px);}
+    .brand{font-weight:700;color:#fff;font-size:1.35rem}
+     .navbar {
+      background: rgba(0, 0, 0, 0.6);
+       backdrop-filter: blur(8px);
+    }
+    .navbar-brand {
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: #fff !important;
+    }
+    .navbar-nav .nav-link {
+      color: #fff !important;
+      margin: 0 10px;
+      font-weight: bolder;
+    }
+    .navbar-nav .nav-link:hover {
+      color: #f8d210 !important;
+    }
+
+    body{font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:#f4f6f8; margin:0}
+    header.page-hero{padding:90px 0 24px; background:linear-gradient(180deg,#fff 0%, #f7f9fb 100%)}
+    .filters .card{position:sticky; top:88px}
+    .hotel-card{border-radius:12px; overflow:hidden; transition:transform .22s, box-shadow .22s}
+    .hotel-card:hover{transform:translateY(-6px); box-shadow:0 18px 40px rgba(2,6,23,.08)}
+    .hotel-thumb{height:180px; object-fit:cover; width:100%}
+    .price-pill{position:absolute; top:12px; right:12px; background:var(--accent); color:#000; font-weight:700; padding:6px 10px; border-radius:999px}
+     footer {
+      background: #111;
+      color: #ddd;
+      padding: 40px 0 20px;
+    }
+    footer a {
+      color: #f8d210;
+      text-decoration: none;
+    }
+    footer a:hover {
+        color: #fff;
+      text-decoration: underline;
+    }
+
+    /* Responsive */
+    @media (max-width: 992px){
+      .filters .card{position:static; top:auto; margin-bottom:18px}
+    }
+    @media (max-width:576px){
+      .hotel-thumb{height:140px}
+      header.page-hero{padding:70px 0 16px}
+    }
+  </style>
+</head>
+<body>
+  <!-- NAVBAR (shared) -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="#">Luxury Stays</a>
+    <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse text-center" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="rooms.html">Hotels</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  <header class="page-hero">
+    <div class="container">
+      <h1 class="display-6 fw-bold" data-aos="fade-down">Find hotels by price, location & rating</h1>
+      <p class="text-muted" data-aos="fade-up" data-aos-delay="80">Use filters to refine results — mobile-friendly & fast.</p>
+    </div>
+  </header>
+
+  <main class="container my-4">
+    <div class="row g-4">
+      <!-- FILTERS -->
+      <aside class="col-lg-3">
+        <div class="card p-3" data-aos="fade-right">
+          <h5 class="mb-3">Filters</h5>
+          <label class="form-label">Max price: <strong id="lblPrice">$300</strong></label>
+          <input id="rngPrice" type="range" class="form-range" min="50" max="600" step="10" value="300">
+          <label class="form-label mt-3">Location</label>
+          <select id="selLoc" class="form-select">
+            <option value="">Any</option><option>City</option><option>Beach</option><option>Mountain</option>
+          </select>
+          <label class="form-label mt-3">Minimum stars</label>
+          <select id="selStars" class="form-select">
+            <option value="0">Any</option><option value="3">3★+</option><option value="4">4★+</option><option value="5">5★</option>
+          </select>
+          <label class="form-label mt-3">Sort</label>
+          <select id="selSort" class="form-select"><option value="rec">Recommended</option><option value="priceAsc">Price: Low → High</option><option value="priceDesc">Price: High → Low</option><option value="ratingDesc">Rating: High → Low</option></select>
+          <button id="btnClear" class="btn btn-outline-secondary w-100 mt-3">Clear</button>
+        </div>
+      </aside>
+
+      <!-- LIST -->
+      <section class="col-lg-9">
+        <div id="grid" class="row g-4">
+          <!-- sample cards (data attributes used by JS filters) -->
+          <div class="col-md-6 col-xl-4" data-price="120" data-stars="5" data-loc="City" data-aos="zoom-in">
+            <div class="card hotel-card position-relative h-100">
+              <span class="price-pill">$120</span>
+              <img class="hotel-thumb" src="Assets/Photos/luxury room.jpg" alt="Hotel">
+              <div class="card-body">
+                <h5 class="card-title">Luxury Palace <small class="text-warning">★★★★★</small></h5>
+                <p class="text-muted small">City • Pool • Breakfast</p>
+                <div class="d-flex gap-2 mt-3">
+                  <a href="hotel-detail.html" class="btn btn-outline-dark btn-sm w-50">View</a>
+                  <button class="btn btn-warning btn-sm w-50 add-cart" data-name="Luxury Palace" data-price="120">Book</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-xl-4" data-price="150" data-stars="4" data-loc="Beach" data-aos="zoom-in" data-aos-delay="80">
+            <div class="card hotel-card position-relative h-100">
+              <span class="price-pill">$150</span>
+              <img class="hotel-thumb" src="Assets/Photos/seaside resorts.jpg" alt="">
+              <div class="card-body">
+                <h5 class="card-title">Seaside Resort <small class="text-warning">★★★★</small></h5>
+                <p class="text-muted small">Beach • Spa • Sea view</p>
+                <div class="d-flex gap-2 mt-3">
+                  <a href="hotel-detail.html" class="btn btn-outline-dark btn-sm w-50">View</a>
+                  <button class="btn btn-warning btn-sm w-50 add-cart" data-name="Seaside Resort" data-price="150">Book</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-xl-4" data-price="95" data-stars="3" data-loc="Mountain" data-aos="zoom-in" data-aos-delay="160">
+            <div class="card hotel-card position-relative h-100">
+              <span class="price-pill">$95</span>
+              <img class="hotel-thumb" src="Assets/Photos/mountain retreat.jpg" alt="">
+              <div class="card-body">
+                <h5 class="card-title">Mountain Retreat <small class="text-warning">★★★★★</small></h5>
+                <p class="text-muted small">Mountain • Hiking • Fireplace</p>
+                <div class="d-flex gap-2 mt-3">
+                  <a href="hotel-detail.html" class="btn btn-outline-dark btn-sm w-50">View</a>
+                  <button class="btn btn-warning btn-sm w-50 add-cart" data-name="Mountain Retreat" data-price="95">Book</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-xl-4" data-price="95" data-stars="3" data-loc="Mountain" data-aos="zoom-in" data-aos-delay="160">
+            <div class="card hotel-card position-relative h-100">
+              <span class="price-pill">$95</span>
+              <img class="hotel-thumb" src="Assets/Photos/Suite rooms.jpg" alt="">
+              <div class="card-body">
+                <h5 class="card-title">Suite Rooms <small class="text-warning">★★★★</small></h5>
+                <p class="text-muted small">Sea • Beach • Coolingplace</p>
+                <div class="d-flex gap-2 mt-3">
+                  <a href="hotel-detail.html" class="btn btn-outline-dark btn-sm w-50">View</a>
+                  <button class="btn btn-warning btn-sm w-50 add-cart" data-name="Suite Rooms" data-price="95">Book</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-xl-4" data-price="95" data-stars="3" data-loc="Mountain" data-aos="zoom-in" data-aos-delay="160">
+            <div class="card hotel-card position-relative h-100">
+              <span class="price-pill">$95</span>
+              <img class="hotel-thumb" src="Assets/Photos/Couple Rooms.jpg" alt="">
+              <div class="card-body">
+                <h5 class="card-title">Couple Rooms <small class="text-warning">★★★★★</small></h5>
+                <p class="text-muted small">Love • Cozy • Romantic</p>
+                <div class="d-flex gap-2 mt-3">
+                  <a href="hotel-detail.html" class="btn btn-outline-dark btn-sm w-50">View</a>
+                  <button class="btn btn-warning btn-sm w-50 add-cart" data-name="Couple Rooms" data-price="95">Book</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-xl-4" data-price="95" data-stars="3" data-loc="Mountain" data-aos="zoom-in" data-aos-delay="160">
+            <div class="card hotel-card position-relative h-100">
+              <span class="price-pill">$95</span>
+              <img class="hotel-thumb" src="Assets/Photos/Kids room.jpg" alt="">
+              <div class="card-body">
+                <h5 class="card-title">Kids Room <small class="text-warning">★★★★</small></h5>
+                <p class="text-muted small">Kids • Fun • Playful</p>
+                <div class="d-flex gap-2 mt-3">
+                  <a href="hotel-detail.html" class="btn btn-outline-dark btn-sm w-50">View</a>
+                  <button class="btn btn-warning btn-sm w-50 add-cart" data-name="Kids Room" data-price="95">Book</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+           <div class="col-md-6 col-xl-4" data-price="95" data-stars="3" data-loc="Mountain" data-aos="zoom-in" data-aos-delay="160">
+            <div class="card hotel-card position-relative h-100">
+              <span class="price-pill">$95</span>
+              <img class="hotel-thumb" src="Assets/Photos/Executive AC room.jpg" alt="">
+              <div class="card-body">
+                <h5 class="card-title">Executive AC Room <small class="text-warning">★★★★</small></h5>
+                <p class="text-muted small">Sleep • Comfort • Luxury</p>
+                <div class="d-flex gap-2 mt-3">
+                  <a href="hotel-detail.html" class="btn btn-outline-dark btn-sm w-50">View</a>
+                  <button class="btn btn-warning btn-sm w-50 add-cart" data-name="Executive AC Room" data-price="95">Book</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+           <div class="col-md-6 col-xl-4" data-price="95" data-stars="3" data-loc="Mountain" data-aos="zoom-in" data-aos-delay="160">
+            <div class="card hotel-card position-relative h-100">
+              <span class="price-pill">$95</span>
+              <img class="hotel-thumb" src="Assets/Photos/Superior Family room.jpg" alt="">
+              <div class="card-body">
+                <h5 class="card-title">Superior Family Room <small class="text-warning">★★★★</small></h5>
+                <p class="text-muted small">Family • Spacious • Comfort</p>
+                <div class="d-flex gap-2 mt-3">
+                  <a href="hotel-detail.html" class="btn btn-outline-dark btn-sm w-50">View</a>
+                  <button class="btn btn-warning btn-sm w-50 add-cart" data-name="Superior Family Room" data-price="95">Book</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+           <div class="col-md-6 col-xl-4" data-price="95" data-stars="3" data-loc="Mountain" data-aos="zoom-in" data-aos-delay="160">
+            <div class="card hotel-card position-relative h-100">
+              <span class="price-pill">$95</span>
+              <img class="hotel-thumb" src="Assets/Photos/Super Deluxe.jpg" alt="">
+              <div class="card-body">
+                <h5 class="card-title">Super Deluxe Room <small class="text-warning">★★★★</small></h5>
+                <p class="text-muted small">Party • Fun • Adventure</p>
+                <div class="d-flex gap-2 mt-3">
+                  <a href="hotel-detail.html" class="btn btn-outline-dark btn-sm w-50">View</a>
+                  <button class="btn btn-warning btn-sm w-50 add-cart" data-name="Super Deluxe Room" data-price="95">Book</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+           <div class="col-md-6 col-xl-4" data-price="95" data-stars="3" data-loc="Mountain" data-aos="zoom-in" data-aos-delay="160">
+            <div class="card hotel-card position-relative h-100">
+              <span class="price-pill">$95</span>
+              <img class="hotel-thumb" src="Assets/Photos/Honey Moon.jpg" alt="">
+              <div class="card-body">
+                <h5 class="card-title">HoneyMoon Room <small class="text-warning">★★★★</small></h5>
+                <p class="text-muted small">Love • Romance • Intimacy</p>
+                <div class="d-flex gap-2 mt-3">
+                  <a href="hotel-detail.html" class="btn btn-outline-dark btn-sm w-50">View</a>
+                  <button class="btn btn-warning btn-sm w-50 add-cart" data-name="HoneyMoon Room" data-price="95">Book</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+           <div class="col-md-6 col-xl-4" data-price="95" data-stars="3" data-loc="Mountain" data-aos="zoom-in" data-aos-delay="160">
+            <div class="card hotel-card position-relative h-100">
+              <span class="price-pill">$95</span>
+              <img class="hotel-thumb" src="Assets/Photos/Normal Room.jpg" alt="">
+              <div class="card-body">
+                <h5 class="card-title">Normal Room <small class="text-warning">★★★★</small></h5>
+                <p class="text-muted small">Sleep • Work • Relax</p>
+                <div class="d-flex gap-2 mt-3">
+                  <a href="hotel-detail.html" class="btn btn-outline-dark btn-sm w-50">View</a>
+                  <button class="btn btn-warning btn-sm w-50 add-cart" data-name="Normal Room" data-price="95">Book</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+           <div class="col-md-6 col-xl-4" data-price="95" data-stars="3" data-loc="Mountain" data-aos="zoom-in" data-aos-delay="160">
+            <div class="card hotel-card position-relative h-100">
+              <span class="price-pill">$95</span>
+              <img class="hotel-thumb" src="Assets/Photos/Deluxe Room.jpg" alt="">
+              <div class="card-body">
+                <h5 class="card-title">Deluxe Room <small class="text-warning">★★★★</small></h5>
+                <p class="text-muted small">Sleep • Comfort • Relaxation</p>
+                <div class="d-flex gap-2 mt-3">
+                  <a href="hotel-detail.html" class="btn btn-outline-dark btn-sm w-50">View</a>
+                  <button class="btn btn-warning btn-sm w-50 add-cart" data-name="Deluxe Room" data-price="95">Book</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          
+
+          <!-- add more cards as needed -->
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- SHARED FOOTER -->
+  <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <h5>Luxury Stays</h5>
+        <p>Your trusted partner for luxury travel experiences.</p>
+      </div>
+      <div class="col-md-4">
+        <h5>Quick Links</h5>
+        <ul class="list-unstyled">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="collections.html">Hotels</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <h5>Newsletter</h5>
+        <form>
+          <input type="email" class="form-control mb-2" placeholder="Enter email">
+          <button class="btn btn-warning w-100">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <hr class="border-light">
+    <p class="text-center">&copy; 2025 Luxury Stays. All rights reserved.</p>
+  </div>
+</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({once:true});
+    const rng = document.getElementById('rngPrice'), lbl = document.getElementById('lblPrice');
+    const selLoc = document.getElementById('selLoc'), selStars = document.getElementById('selStars'), selSort = document.getElementById('selSort');
+    const btnClear = document.getElementById('btnClear'), grid = document.getElementById('grid');
+
+    function apply(){
+      lbl.textContent = '$' + rng.value;
+      const max = +rng.value, loc = selLoc.value, stars = +selStars.value;
+      const items = [...grid.children];
+      items.forEach(col=>{
+        const price = +col.dataset.price, pStars = +col.dataset.stars, pLoc = col.dataset.loc;
+        const show = price <= max && (stars===0 || pStars>=stars) && (loc==='' || pLoc===loc);
+        col.style.display = show ? '' : 'none';
+      });
+      sortItems();
+    }
+    function sortItems(){
+      const mode = selSort.value;
+      const visible = [...grid.children].filter(c=>c.style.display!=='none');
+      visible.sort((a,b)=>{
+        const pa=+a.dataset.price, pb=+b.dataset.price, ra=+a.dataset.stars, rb=+b.dataset.stars;
+        if(mode==='priceAsc') return pa-pb; if(mode==='priceDesc') return pb-pa; if(mode==='ratingDesc') return rb-ra; return 0;
+      }).forEach(n=>grid.appendChild(n));
+    }
+    rng.addEventListener('input', apply);
+    [selLoc, selStars, selSort].forEach(el=>el.addEventListener('change', apply));
+    btnClear.addEventListener('click', ()=>{ rng.value=300; selLoc.value=''; selStars.value='0'; selSort.value='rec'; apply(); });
+
+    // cart (localStorage simple)
+    document.querySelectorAll('.add-cart').forEach(btn=>{
+      btn.addEventListener('click', ()=> {
+        const item = {name: btn.dataset.name, price:+btn.dataset.price, nights:1};
+        localStorage.setItem('cartItem', JSON.stringify(item));
+        alert(item.name + ' added to cart');
+        window.location.href = 'cart.html';
+      });
+    });
+    apply();
+  </script>
+</body>
+</html>
