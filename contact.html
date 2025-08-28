@@ -45,8 +45,8 @@
       color: #fff;
       text-decoration: underline;
     }
-    .floating-chat{position:fixed; right:18px; bottom:18px; z-index:1060}
-    .chat-box{position:fixed; right:18px; bottom:82px; width:340px; max-width:94vw; display:none; z-index:1060}
+    .floating-chat{position:fixed; right:18px; bottom:18px; z-index:1060; overflow-x: hidden;}
+    .chat-box{position:fixed; right:18px; bottom:82px; width:340px; max-width:94vw; display:none; z-index:1060; overflow-y: auto; overflow-x: hidden;}
     @media(max-width:576px){ .chat-box{width:92vw} }
   </style>
 </head>
