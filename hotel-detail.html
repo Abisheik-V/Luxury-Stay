@@ -7,55 +7,64 @@
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
   <style>
     :root{--accent:#f8d210}
-    .site-navbar{background:linear-gradient(180deg, rgba(11,19,32,0.65), rgba(11,19,32,0.35)); backdrop-filter:blur(6px)}
     body{font-family:Inter, Arial, sans-serif; background:#fbfcfe}
-     .navbar {
-      background: rgba(0, 0, 0, 0.6);
-       backdrop-filter: blur(8px);
-       overflow-x: hidden;
+    /* NAVBAR */
+    .navbar {
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(8px);
     }
     .navbar-brand {
       font-weight: 700;
       font-size: 1.5rem;
       color: #fff !important;
-      overflow-x: hidden;
     }
     .navbar-nav .nav-link {
       color: #fff !important;
       margin: 0 10px;
-      font-weight: bolder;
-      overflow-x: hidden;
+      font-weight: 600;
     }
     .navbar-nav .nav-link:hover {
-      color: #f8d210 !important;
+      color: var(--accent) !important;
     }
+
+    /* CAROUSEL */
     .carousel-item > img{height:460px; object-fit:cover; width:100%}
-    .amenity{display:inline-block; background:#eef6ff; border-radius:999px; padding:6px 10px; margin:6px 6px 0 0; font-size:.9rem}
+
+    /* AMENITIES */
+    .amenity{
+      display:inline-block; background:#eef6ff; border-radius:999px; 
+      padding:6px 10px; margin:6px 6px 0 0; font-size:.9rem
+    }
+
+    /* FOOTER */
     footer {
       background: #111;
       color: #ddd;
       padding: 40px 0 20px;
-      overflow-x: hidden;
     }
     footer a {
-      color: #f8d210;
+      color: var(--accent);
       text-decoration: none;
-      overflow-x: hidden;
     }
     footer a:hover {
-        color: #fff;
+      color: #fff;
       text-decoration: underline;
     }
-    @media(max-width:768px){ .carousel-item>img{height:260px} .booking-card{position:static;margin-top:16px} }
+
+    /* RESPONSIVE */
+    @media(max-width:768px){
+      .carousel-item>img{height:260px}
+      .booking-card{margin-top:20px}
+    }
   </style>
 </head>
 <body>
 
 <!-- NAVBAR -->
-<nav class="navbar navbar-expand-lg fixed-top">
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
   <div class="container">
     <a class="navbar-brand" href="#">Luxury Stays</a>
-    <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse text-center" id="navbarNav">
@@ -70,9 +79,12 @@
   </div>
 </nav>
 
-<main class="container" style="padding-top:100px">
+<!-- MAIN -->
+<main class="container py-5" style="margin-top:60px">
   <div class="row g-4">
+    <!-- LEFT CONTENT -->
     <div class="col-lg-7" data-aos="fade-right">
+      <!-- Carousel -->
       <div id="photos" class="carousel slide rounded shadow-sm overflow-hidden">
         <div class="carousel-inner">
           <div class="carousel-item active"><img src="Assets/Photos/luxury room.jpg" class="d-block w-100" alt=""></div>
@@ -83,20 +95,26 @@
         <button class="carousel-control-next" data-bs-target="#photos" data-bs-slide="next"><span class="carousel-control-next-icon"></span></button>
       </div>
 
+      <!-- Hotel Info -->
       <div class="mt-3">
         <h2 class="fw-bold">Luxury Palace <small class="text-warning">★★★★★</small></h2>
         <p class="text-muted mb-1">Central City — 0.5km to Museum</p>
         <div class="mb-2">
-          <span class="amenity">Free Wi-Fi</span><span class="amenity">Breakfast</span><span class="amenity">Pool</span><span class="amenity">Spa</span>
+          <span class="amenity">Free Wi-Fi</span>
+          <span class="amenity">Breakfast</span>
+          <span class="amenity">Pool</span>
+          <span class="amenity">Spa</span>
         </div>
         <p>Experience modern luxury in the heart of the city. Spacious rooms, rooftop dining, and excellent service.</p>
       </div>
 
+      <!-- MAP -->
       <div class="ratio ratio-16x9 rounded overflow-hidden mt-3" data-aos="zoom-in">
         <iframe src="https://www.google.com/maps?q=Times%20Square%20New%20York&output=embed" allowfullscreen loading="lazy"></iframe>
       </div>
     </div>
 
+    <!-- BOOKING CARD -->
     <aside class="col-lg-5">
       <div class="card shadow-sm booking-card" data-aos="fade-left">
         <div class="card-body">
@@ -113,12 +131,8 @@
                 <option value="220">Suite — $220/night</option>
               </select>
             </div>
-
             <div class="col-12"><p id="est" class="small text-muted mb-0">Estimated: —</p></div>
-
-            <div class="col-12 d-grid">
-              <button class="btn btn-warning" type="submit">Add to Cart</button>
-            </div>
+            <div class="col-12 d-grid"><button class="btn btn-warning" type="submit">Add to Cart</button></div>
           </form>
         </div>
       </div>
@@ -126,7 +140,7 @@
   </div>
 </main>
 
-<!-- footer -->
+<!-- FOOTER -->
 <footer>
   <div class="container">
     <div class="row">
@@ -138,7 +152,7 @@
         <h5>Quick Links</h5>
         <ul class="list-unstyled">
           <li><a href="index.html">Home</a></li>
-          <li><a href="collections.html">Hotels</a></li>
+          <li><a href="rooms.html">Hotels</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
@@ -160,20 +174,24 @@
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
   AOS.init({once:true});
+
   function nights(a,b){ return Math.max(1, Math.round((b-a)/(24*60*60*1000))); }
-  const din = document.getElementById('din'), dout=document.getElementById('dout'), roomType=document.getElementById('roomType'), est=document.getElementById('est');
-  [din,dout,roomType].forEach(el=>el.addEventListener('change', ()=> {
-    if(din.value && dout.value){ const n=nights(new Date(din.value), new Date(dout.value)); est.textContent = `Estimated: $${n * (+roomType.value)} (${n} night(s) × $${roomType.value})`; }
+  const din=document.getElementById('din'), dout=document.getElementById('dout'), roomType=document.getElementById('roomType'), est=document.getElementById('est');
+
+  [din,dout,roomType].forEach(el=>el.addEventListener('change', ()=>{
+    if(din.value && dout.value){
+      const n=nights(new Date(din.value), new Date(dout.value));
+      est.textContent=`Estimated: $${n*(+roomType.value)} (${n} night(s) × $${roomType.value})`;
+    }
   }));
 
   document.getElementById('frmBook').addEventListener('submit', e=>{
     e.preventDefault();
-    const checkIn=din.value, checkOut=dout.value;
-    if(!checkIn||!checkOut){ alert('Select dates'); return; }
-    const n=nights(new Date(checkIn), new Date(checkOut));
-    const item = {name:'Luxury Palace', price:+roomType.value, nights:n, guests:+document.getElementById('guests').value, rooms:+document.getElementById('rooms').value};
-    localStorage.setItem('cartItem', JSON.stringify(item));
-    window.location.href = 'cart.html';
+    if(!din.value||!dout.value){alert('Select dates');return;}
+    const n=nights(new Date(din.value), new Date(dout.value));
+    const item={name:'Luxury Palace',price:+roomType.value,nights:n,guests:+document.getElementById('guests').value,rooms:+document.getElementById('rooms').value};
+    localStorage.setItem('cartItem',JSON.stringify(item));
+    window.location.href='cart.html';
   });
 </script>
 </body>
