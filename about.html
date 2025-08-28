@@ -1,15 +1,25 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>About — Luxury Stays</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
   <style>
-    body{font-family:Inter, Arial, sans-serif;background:#fbfcfe}
+    /* Prevent unwanted horizontal scrolling */
+    html, body {
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: Inter, Arial, sans-serif;
+      background: #fbfcfe;
+    }
+
     .navbar {
       background: rgba(0, 0, 0, 0.6);
-       backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
     }
     .navbar-brand {
       font-weight: 700;
@@ -24,9 +34,22 @@
     .navbar-nav .nav-link:hover {
       color: #f8d210 !important;
     }
-    .hero{padding:90px 0 24px;text-align:center}
-    .team img{border-radius:12px; object-fit:cover; width:100%; height:260px}
-     footer {
+
+    .hero {
+      padding: 90px 0 24px;
+      text-align: center;
+    }
+
+    /* Team section images */
+    .team img {
+      border-radius: 12px;
+      object-fit: cover;
+      width: 100%;
+      height: 260px;
+      display: block;
+    }
+
+    footer {
       background: #111;
       color: #ddd;
       padding: 40px 0 20px;
@@ -36,85 +59,111 @@
       text-decoration: none;
     }
     footer a:hover {
-        color: #fff;
+      color: #fff;
       text-decoration: underline;
     }
-    @media(max-width:576px){ .team img{height:180px} .hero{padding:70px 0 12px} }
+
+    @media(max-width:576px) {
+      .team img { height: 180px }
+      .hero { padding: 70px 0 12px }
+    }
   </style>
 </head>
 <body>
-  <!-- navbar (same) -->
+  <!-- navbar -->
   <nav class="navbar navbar-expand-lg fixed-top">
-  <div class="container">
-    <a class="navbar-brand" href="#">Luxury Stays</a>
-    <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse text-center" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="rooms.html">Hotels</a></li>
-        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-        <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
-      </ul>
+    <div class="container">
+      <a class="navbar-brand" href="#">Luxury Stays</a>
+      <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse text-center" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="rooms.html">Hotels</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
+        </ul>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
 
+  <!-- hero -->
   <header class="hero" style="padding-top:110px">
-    <div class="container"><h1 data-aos="fade-down">Our Story</h1><p class="text-muted" data-aos="fade-up" data-aos-delay="80">We created Luxury Stays to make booking delightful stays effortless.</p></div>
+    <div class="container">
+      <h1 data-aos="fade-down">Our Story</h1>
+      <p class="text-muted" data-aos="fade-up" data-aos-delay="80">
+        We created Luxury Stays to make booking delightful stays effortless.
+      </p>
+    </div>
   </header>
 
+  <!-- content -->
   <main class="container my-4">
     <div class="row g-4">
       <div class="col-md-6" data-aos="fade-right">
-        <div class="card shadow-sm p-3"><h4>Mission</h4><p>Make travel simpler with curated hotels, transparent pricing and caring service.</p></div>
+        <div class="card shadow-sm p-3">
+          <h4>Mission</h4>
+          <p>Make travel simpler with curated hotels, transparent pricing and caring service.</p>
+        </div>
       </div>
       <div class="col-md-6" data-aos="fade-left">
-        <div class="card shadow-sm p-3"><h4>Vision</h4><p>Be the most loved place to discover unique stays and hospitality experiences.</p></div>
+        <div class="card shadow-sm p-3">
+          <h4>Vision</h4>
+          <p>Be the most loved place to discover unique stays and hospitality experiences.</p>
+        </div>
       </div>
     </div>
 
     <section class="my-5">
       <h3 data-aos="fade-up">Meet the team</h3>
       <div class="row g-4 mt-2">
-        <div class="col-md-4 team" data-aos="zoom-in"><img src="Assets/Photos/robert-downey-jr.jpg" alt=""><div class="mt-2"><strong>Tony Stark</strong><div class="small text-muted">CEO</div></div></div>
-        <div class="col-md-4 team" data-aos="zoom-in" data-aos-delay="100"><img src="Assets/Photos/Steve Rogers.jpg" alt=""><div class="mt-2"><strong>Steve Rogers</strong><div class="small text-muted">Head of Product</div></div></div>
-        <div class="col-md-4 team" data-aos="zoom-in" data-aos-delay="200"><img src="Assets/Photos/Scarlett Johnson.jpg" alt=""><div class="mt-2"><strong>Scarlett Johnson</strong><div class="small text-muted">Partnerships</div></div></div>
+        <div class="col-md-4 team" data-aos="zoom-in">
+          <img src="Assets/Photos/robert-downey-jr.jpg" alt="Tony Stark">
+          <div class="mt-2"><strong>Tony Stark</strong><div class="small text-muted">CEO</div></div>
+        </div>
+        <div class="col-md-4 team" data-aos="zoom-in" data-aos-delay="100">
+          <img src="Assets/Photos/Steve Rogers.jpg" alt="Steve Rogers">
+          <div class="mt-2"><strong>Steve Rogers</strong><div class="small text-muted">Head of Product</div></div>
+        </div>
+        <div class="col-md-4 team" data-aos="zoom-in" data-aos-delay="200">
+          <img src="Assets/Photos/Scarlett Johnson.jpg" alt="Scarlett Johnson">
+          <div class="mt-2"><strong>Scarlett Johnson</strong><div class="small text-muted">Partnerships</div></div>
+        </div>
       </div>
     </section>
   </main>
 
   <!-- footer -->
-<footer>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-4">
-        <h5>Luxury Stays</h5>
-        <p>Your trusted partner for luxury travel experiences.</p>
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <h5>Luxury Stays</h5>
+          <p>Your trusted partner for luxury travel experiences.</p>
+        </div>
+        <div class="col-md-4">
+          <h5>Quick Links</h5>
+          <ul class="list-unstyled">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="rooms.html">Hotels</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h5>Newsletter</h5>
+          <form>
+            <input type="email" class="form-control mb-2" placeholder="Enter email">
+            <button class="btn btn-warning w-100">Subscribe</button>
+          </form>
+        </div>
       </div>
-      <div class="col-md-4">
-        <h5>Quick Links</h5>
-        <ul class="list-unstyled">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="collections.html">Hotels</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </div>
-      <div class="col-md-4">
-        <h5>Newsletter</h5>
-        <form>
-          <input type="email" class="form-control mb-2" placeholder="Enter email">
-          <button class="btn btn-warning w-100">Subscribe</button>
-        </form>
-      </div>
+      <hr class="border-light">
+      <p class="text-center">&copy; 2025 Luxury Stays. All rights reserved.</p>
     </div>
-    <hr class="border-light">
-    <p class="text-center">&copy; 2025 Luxury Stays. All rights reserved.</p>
-  </div>
-</footer>
+  </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
