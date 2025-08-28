@@ -1,15 +1,16 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>Contact — Luxury Stays</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
   <style>
     body{font-family:Inter, Arial, sans-serif;background:#fbfcfe}
-     .navbar {
+    .navbar {
       background: rgba(0, 0, 0, 0.6);
-       backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
     }
     .navbar-brand {
       font-weight: 700;
@@ -24,7 +25,14 @@
     .navbar-nav .nav-link:hover {
       color: #f8d210 !important;
     }
-     footer {
+    /* fix navbar toggler icon for dark bg */
+    .navbar-toggler {
+      border-color: #fff;
+    }
+    .navbar-toggler-icon {
+      filter: invert(1);
+    }
+    footer {
       background: #111;
       color: #ddd;
       padding: 40px 0 20px;
@@ -34,7 +42,7 @@
       text-decoration: none;
     }
     footer a:hover {
-        color: #fff;
+      color: #fff;
       text-decoration: underline;
     }
     .floating-chat{position:fixed; right:18px; bottom:18px; z-index:1060}
@@ -43,26 +51,29 @@
   </style>
 </head>
 <body>
+  <!-- Navbar -->
   <nav class="navbar navbar-expand-lg fixed-top">
-  <div class="container">
-    <a class="navbar-brand" href="#">Luxury Stays</a>
-    <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse text-center" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="rooms.html">Hotels</a></li>
-        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-        <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
-      </ul>
+    <div class="container">
+      <a class="navbar-brand" href="#">Luxury Stays</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse text-center" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="rooms.html">Hotels</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link active" href="contact.html">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
+        </ul>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
 
+  <!-- Main -->
   <main class="container" style="padding-top:100px">
     <div class="row g-4">
+      <!-- Contact Form -->
       <div class="col-lg-6" data-aos="fade-right">
         <h3>Contact Us</h3>
         <p class="text-muted">We reply within 24 hours — or use live chat for instant help.</p>
@@ -71,60 +82,94 @@
             <div class="col-md-6"><input class="form-control" placeholder="Name" required></div>
             <div class="col-md-6"><input class="form-control" placeholder="Email" type="email" required></div>
             <div class="col-12"><textarea class="form-control" rows="6" placeholder="Message" required></textarea></div>
-            <div class="col-12"><button class="btn btn-warning">Send Message</button></div>
+            <div class="col-12"><button class="btn btn-warning w-100">Send Message</button></div>
           </div>
         </form>
       </div>
+      <!-- Map -->
       <div class="col-lg-6" data-aos="fade-left">
         <h3>Our Location</h3>
         <div class="ratio ratio-16x9 rounded overflow-hidden">
-          <iframe src="https://www.google.com/maps?q=Marina%20Beach%20Chennai&output=embed" loading="lazy"></iframe>
+          <iframe 
+            src="https://www.google.com/maps?q=Marina%20Beach%20Chennai&output=embed" 
+            style="border:0;" 
+            allowfullscreen 
+            loading="lazy">
+          </iframe>
         </div>
         <p class="small mt-2 text-muted">HQ: 123 Travel St, City Center • support@luxurystays.com</p>
       </div>
     </div>
   </main>
 
-  <!-- live chat -->
-  <div class="chat-box" id="chatBox"><div class="card shadow-lg"><div class="card-header d-flex justify-content-between align-items-center"><strong>Support</strong><button class="btn btn-sm btn-outline-secondary" onclick="toggleChat()">×</button></div><div class="card-body" style="height:260px; overflow:auto"><div class="small text-muted">Agent is online — say hi 👋</div></div><div class="card-footer d-flex gap-2"><input id="chatInput" class="form-control form-control-sm" placeholder="Type a message..."><button class="btn btn-sm btn-warning" onclick="sendChat()">Send</button></div></div></div>
-  <div class="floating-chat"><button id="openChat" class="btn btn-warning rounded-pill">Live Chat</button></div>
-
-<footer>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-4">
-        <h5>Luxury Stays</h5>
-        <p>Your trusted partner for luxury travel experiences.</p>
+  <!-- Live chat -->
+  <div class="chat-box" id="chatBox">
+    <div class="card shadow-lg">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <strong>Support</strong>
+        <button class="btn btn-sm btn-outline-secondary" onclick="toggleChat()">×</button>
       </div>
-      <div class="col-md-4">
-        <h5>Quick Links</h5>
-        <ul class="list-unstyled">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="collections.html">Hotels</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
+      <div class="card-body" style="height:260px; overflow:auto">
+        <div class="small text-muted">Agent is online — say hi 👋</div>
       </div>
-      <div class="col-md-4">
-        <h5>Newsletter</h5>
-        <form>
-          <input type="email" class="form-control mb-2" placeholder="Enter email">
-          <button class="btn btn-warning w-100">Subscribe</button>
-        </form>
+      <div class="card-footer d-flex gap-2">
+        <input id="chatInput" class="form-control form-control-sm" placeholder="Type a message...">
+        <button class="btn btn-sm btn-warning" onclick="sendChat()">Send</button>
       </div>
     </div>
-    <hr class="border-light">
-    <p class="text-center">&copy; 2025 Luxury Stays. All rights reserved.</p>
   </div>
-</footer>
+  <div class="floating-chat"><button id="openChat" class="btn btn-warning rounded-pill">Live Chat</button></div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <h5>Luxury Stays</h5>
+          <p>Your trusted partner for luxury travel experiences.</p>
+        </div>
+        <div class="col-md-4">
+          <h5>Quick Links</h5>
+          <ul class="list-unstyled">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="rooms.html">Hotels</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h5>Newsletter</h5>
+          <form>
+            <input type="email" class="form-control mb-2" placeholder="Enter email">
+            <button class="btn btn-warning w-100">Subscribe</button>
+          </form>
+        </div>
+      </div>
+      <hr class="border-light">
+      <p class="text-center">&copy; 2025 Luxury Stays. All rights reserved.</p>
+    </div>
+  </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>AOS.init({once:true});</script>
   <script>
-    function toggleChat(){ const el = document.getElementById('chatBox'); el.style.display = (el.style.display==='block')? 'none':'block'; }
+    function toggleChat(){
+      const el = document.getElementById('chatBox');
+      el.style.display = (el.style.display==='block')? 'none':'block';
+    }
     document.getElementById('openChat').addEventListener('click', toggleChat);
-    function sendChat(){ const input = document.getElementById('chatInput'); if(!input.value.trim()) return; const body = document.querySelector('#chatBox .card-body'); const p = document.createElement('div'); p.className='mt-2'; p.textContent = 'You: ' + input.value; body.appendChild(p); input.value=''; body.scrollTop = body.scrollHeight; }
+    function sendChat(){
+      const input = document.getElementById('chatInput');
+      if(!input.value.trim()) return;
+      const body = document.querySelector('#chatBox .card-body');
+      const p = document.createElement('div');
+      p.className='mt-2';
+      p.textContent = 'You: ' + input.value;
+      body.appendChild(p);
+      input.value='';
+      body.scrollTop = body.scrollHeight;
+    }
   </script>
 </body>
 </html>
